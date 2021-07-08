@@ -223,13 +223,13 @@ class SamlFactory implements SecurityFactoryInterface, AuthenticatorFactoryInter
 
     protected function createUserListeners(ContainerBuilder $container, string $firewallName, array $config): void
     {
-        $container->setDefinition('hslavich_onelogin_saml.user_created_listener'.$firewallName, new ChildDefinition('hslavich_onelogin_saml.user_created_listener'))
+        $container->setDefinition('hslavich_onelogin_saml.user_created_listener.'.$firewallName, new ChildDefinition('hslavich_onelogin_saml.user_created_listener'))
             ->replaceArgument(1, $config['persist_user'])
             ->addTag('hslavich.saml_user_listener')
             ->addTag('kernel.event_listener', ['event' => UserCreatedEvent::class])
         ;
 
-        $container->setDefinition('hslavich_onelogin_saml.user_modified_listener'.$firewallName, new ChildDefinition('hslavich_onelogin_saml.user_modified_listener'))
+        $container->setDefinition('hslavich_onelogin_saml.user_modified_listener.'.$firewallName, new ChildDefinition('hslavich_onelogin_saml.user_modified_listener'))
             ->replaceArgument(1, $config['persist_user'])
             ->addTag('hslavich.saml_user_listener')
             ->addTag('kernel.event_listener', ['event' => UserModifiedEvent::class])
